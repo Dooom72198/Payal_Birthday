@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payal — Meri Pyaari Saheli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#080b22; --night2:#11163b; --pink:#ff7eb6; --rose:#ffb3d1;
+  --lav:#bca7ff; --gold:#ffe5a3; --white:#fff8fc; --muted:#d9d5ea;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:radial-gradient(circle at 50% 0%,#24265c 0%,var(--night2) 38%,var(--night) 100%);
+  color:var(--white);font-family:'Lora',serif;overflow-x:hidden;
+}
+img{max-width:100%;display:block}.script{font-family:'Caveat',cursive}
+.display{font-family:'Playfair Display',serif}.deva{font-family:'Noto Serif Devanagari',serif}
+
+/* animated sky */
+.sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.7;animation:twinkle 2.5s ease-in-out infinite}
+.moon{position:absolute;right:8vw;top:8vh;width:90px;height:90px;border-radius:50%;
+ background:linear-gradient(135deg,#fffbe8,#ffe7b0);box-shadow:0 0 45px rgba(255,230,170,.35)}
+.moon:after{content:"";position:absolute;width:88px;height:88px;border-radius:50%;background:#11163b;left:22px;top:-8px}
+@keyframes twinkle{50%{opacity:.15;transform:scale(.65)}}
+
+/* opening */
+.letter-opening{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;
+ background:radial-gradient(circle at 50% 35%,#343775,#151942 45%,#07091b);
+ transition:opacity 1s ease,visibility 1s ease}
+.letter-opening.hide{opacity:0;visibility:hidden;pointer-events:none}
+.envelope{width:min(88vw,560px);height:390px;position:relative;cursor:pointer;filter:drop-shadow(0 28px 40px rgba(0,0,0,.5))}
+.env-back{position:absolute;inset:50px 0 0;border-radius:18px;
+ background:linear-gradient(145deg,#d85b91,#8c3866);overflow:hidden}
+.env-back:after{content:"";position:absolute;inset:0;background:
+ linear-gradient(135deg,transparent 49%,rgba(255,255,255,.18) 50%),
+ linear-gradient(225deg,transparent 49%,rgba(255,255,255,.12) 50%)}
+.paper{position:absolute;z-index:3;left:8%;right:8%;top:48px;height:255px;
+ background:#fffafd;color:#42243b;padding:32px 25px;text-align:center;border-radius:12px;
+ box-shadow:0 10px 35px rgba(0,0,0,.28);transition:transform 1.1s cubic-bezier(.2,.8,.2,1),top 1.1s}
+.envelope.open .paper{transform:translateY(-125px);top:10px}
+.paper .mini{color:#9b4771;font-size:1rem}.paper h2{font-size:2.2rem;font-style:italic;color:#7e3459;margin:12px 0}
+.paper p{font-family:'Caveat',cursive;font-size:1.4rem}.flap{position:absolute;z-index:5;left:0;right:0;top:50px;height:185px;
+ background:linear-gradient(145deg,#ef8db6,#b44778);clip-path:polygon(0 0,100% 0,50% 75%);transform-origin:top;
+ transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.envelope.open .flap{transform:rotateX(180deg);z-index:2}
+.seal-open{position:absolute;z-index:6;left:50%;top:165px;transform:translate(-50%,-50%);
+ width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#fff0f7;color:#8c3866;
+ box-shadow:0 0 0 5px rgba(255,255,255,.16),0 7px 20px rgba(0,0,0,.35);font-weight:600}
+.envelope.open .seal-open{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+.open-hint{position:absolute;bottom:0;width:100%;text-align:center;color:#ffd2e6;font-family:'Caveat',cursive;font-size:1.35rem;animation:float 1.7s infinite}
+.envelope.open .open-hint{opacity:0}
+@keyframes float{50%{transform:translateY(-7px)}}
+
+/* hero */
+.hero{min-height:100svh;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ text-align:center;padding:10vh 6vw 8vh}
+.hero:after{content:"♡  ✦  ♡";position:absolute;bottom:7%;font-size:1.5rem;letter-spacing:1.2rem;color:var(--pink);opacity:.65;animation:pulse 2.4s infinite}
+.hero-frame{width:min(340px,72vw);padding:10px;border:1px solid rgba(255,255,255,.45);
+ background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,126,182,.18));border-radius:22px;
+ box-shadow:0 25px 70px rgba(0,0,0,.45),0 0 45px rgba(255,126,182,.18);transform:rotate(-2deg);
+ animation:rise 1s ease forwards}
+.hero-frame-inner{padding:8px;border-radius:16px;background:#171a40}.hero-frame img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px}
+.hero-eyebrow{margin-top:2.2rem;color:var(--rose);font-size:1.1rem;letter-spacing:.03em}
+.hero-name{font-size:clamp(4rem,15vw,8rem);font-style:italic;color:#fff;
+ text-shadow:0 0 28px rgba(255,126,182,.35);margin:.12em 0;animation:nameGlow 3s infinite}
+.hero-sub{max-width:34rem;color:var(--muted);font-family:'Caveat',cursive;font-size:clamp(1.35rem,3vw,1.75rem);line-height:1.5}
+@keyframes rise{from{opacity:0;transform:translateY(25px) rotate(-2deg)}to{opacity:1;transform:translateY(0) rotate(-2deg)}}
+@keyframes nameGlow{50%{text-shadow:0 0 45px rgba(255,126,182,.65),0 0 75px rgba(188,167,255,.2)}}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.9}}
+
+/* story */
+.story{position:relative;z-index:1;max-width:68rem;margin:auto;padding:10vh 6vw 14vh}
+.story-intro{text-align:center;font-family:'Caveat',cursive;font-size:clamp(1.8rem,4vw,2.5rem);color:#ffd7e8;margin-bottom:9vh}
+.entry{display:grid;grid-template-columns:260px 1fr;gap:4rem;align-items:center;margin-bottom:11vh}
+.entry.flip{grid-template-columns:1fr 260px}.entry.flip .entry-photo{order:2}.entry.flip .entry-text{order:1;text-align:right}
+.entry-photo{padding:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:18px;
+ box-shadow:0 20px 45px rgba(0,0,0,.35);transform:rotate(-4deg);transition:.5s}
+.entry.flip .entry-photo{transform:rotate(4deg)}.entry-photo:hover{transform:translateY(-10px) rotate(0) scale(1.03)}
+.entry-photo img{width:100%;aspect-ratio:1/1.08;object-fit:cover;border-radius:11px}.cap{text-align:center;font-family:'Caveat',cursive;font-size:1.35rem;color:#ffd6e8;padding:8px}
+.moment-tag{color:var(--lav);font-size:1.05rem;margin-bottom:.7rem}.entry-text p{font-size:1.08rem;line-height:1.9;color:var(--muted)}
+.entry-text em{color:#ff9fc6;font-family:'Playfair Display',serif}
+
+/* memory cards */
+.board{position:relative;z-index:1;padding:11vh 6vw;background:rgba(255,255,255,.035);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.board-title{text-align:center;font-size:clamp(1.8rem,4vw,2.5rem);font-style:italic;color:#ffd5e8;margin-bottom:7vh}
+.board-grid{max-width:65rem;margin:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:2.4rem}
+.polaroid{width:14rem;padding:11px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.35);transition:.45s}
+.polaroid img{width:100%;aspect-ratio:1/1.08;object-fit:cover;border-radius:10px}.polaroid:hover{transform:translateY(-12px) rotate(0)!important}
+.p1{transform:rotate(-6deg)}.p2{transform:rotate(4deg);margin-top:2rem}.p3{transform:rotate(-2deg)}
+
+/* letter */
+.letter{position:relative;z-index:1;padding:14vh 6vw;display:flex;justify-content:center}
+.letter-card{max-width:46rem;width:100%;padding:clamp(2.2rem,6vw,4.5rem);border-radius:28px;
+ background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.045));border:1px solid rgba(255,255,255,.2);
+ box-shadow:0 25px 65px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.letter-card:before{content:"♡";position:absolute;right:1rem;bottom:-1rem;font-size:10rem;color:#ff7eb6;opacity:.08}
+.letter-label{font-family:'Caveat',cursive;font-size:1.6rem;color:#ffb8d4;margin-bottom:1.5rem}
+.letter-hindi{font-size:clamp(1.2rem,2.6vw,1.45rem);line-height:2;color:#fff1f7;margin-bottom:1.8rem}
+.letter-translate{font-style:italic;font-size:1.05rem;line-height:1.9;color:#d7d1e7;border-left:2px solid #ff7eb6;padding-left:1.2rem}
+
+/* closing */
+.closing{min-height:90svh;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10vh 6vw}
+.closing-line{font-family:'Caveat',cursive;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.55;color:#ffe0ed;max-width:40rem;margin-bottom:4rem}
+.candle-wrap{cursor:pointer;background:none;border:0;color:#ffd5e7;display:flex;flex-direction:column;align-items:center;gap:1rem;transition:.35s}
+.candle-wrap:hover{transform:translateY(-7px) scale(1.03)}.candle-svg{width:65px;height:120px}
+.flame{transform-origin:30px 32px;animation:flicker 2.2s infinite}.flame.out{animation:none;opacity:0;transition:.5s}.smoke{opacity:0}.smoke.show{animation:smokeRise 1.8s forwards}
+@keyframes flicker{50%{transform:scale(1.08,.94) rotate(-2deg)}}
+@keyframes smokeRise{to{opacity:0;transform:translateY(-40px) scaleX(1.7)}}
+.candle-caption{font-family:'Caveat',cursive;font-size:1.4rem}.candle-caption .alt{display:none}
+.candle-wrap.blown .candle-caption .main{display:none}.candle-wrap.blown .candle-caption .alt{display:inline}
+.signoff{margin-top:4rem}.seal{width:76px;height:76px;border-radius:50%;margin:auto auto 1rem;display:grid;place-items:center;
+ background:linear-gradient(145deg,#ff8fbc,#9d4776);box-shadow:0 8px 30px rgba(255,126,182,.25)}
+.signoff p{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:#ffb7d3}
+footer{text-align:center;padding:5vh 6vw 7vh;color:#aaa5c0;font-family:'Caveat',cursive}
+.sparkle{position:fixed;pointer-events:none;z-index:60;font-size:1rem;animation:sparkleOut 1s ease-out forwards}
+@keyframes sparkleOut{to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.5)}}
+@media(max-width:720px){
+ .entry,.entry.flip{grid-template-columns:1fr;text-align:left!important}.entry.flip .entry-photo,.entry.flip .entry-text{order:0;text-align:left}
+ .entry-photo{max-width:14rem;margin:auto}.moon{width:60px;height:60px}.moon:after{width:58px;height:58px}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* candle + wish surprise */
+.closing{overflow:hidden}
+.candle-scene{position:relative;display:grid;place-items:center;margin-bottom:2rem}
+.candle-glow{position:absolute;width:180px;height:180px;border-radius:50%;
+ background:radial-gradient(circle,rgba(255,174,106,.28),transparent 68%);
+ animation:candleAura 2s ease-in-out infinite}
+.candle-wrap{position:relative;z-index:2}
+.flame{transform-origin:60px 52px;animation:flameDance 1.15s ease-in-out infinite}
+.smoke{fill:#c7c3d5;opacity:0}
+.smoke.show{animation:smokeRise 2s ease-out forwards}
+.candle-wrap.blown .flame{animation:none;opacity:0;transform:scale(.3);transition:.35s}
+.candle-wrap.blown .candle-glow{animation:none;opacity:0}
+@keyframes flameDance{0%,100%{transform:rotate(-3deg) scale(1)}50%{transform:rotate(4deg) scale(1.08,.94)}}
+@keyframes candleAura{50%{transform:scale(1.18);opacity:.65}}
+@keyframes smokeRise{0%{opacity:.45;transform:translateY(0) scale(1)}100%{opacity:0;transform:translate(18px,-75px) scale(1.9)}}
+
+.wish-message{max-width:620px;width:calc(100% - 20px);padding:0 2rem;max-height:0;opacity:0;
+ overflow:hidden;transform:translateY(25px) scale(.96);transition:max-height 1.2s ease,opacity .9s ease,transform .9s ease;
+ border-radius:28px;background:linear-gradient(145deg,rgba(255,126,182,.13),rgba(188,167,255,.09));
+ border:1px solid rgba(255,255,255,.16)}
+.wish-message.show{max-height:360px;opacity:1;transform:translateY(0) scale(1);padding:2.4rem 2rem;margin:1rem 0 2rem}
+.wish-heart{font-size:4rem;color:#ff8fba;line-height:1;animation:heartBeat 1.5s infinite}
+.wish-message h2{font-family:'Playfair Display',serif;font-style:italic;color:#ffd6e8;font-size:clamp(1.5rem,4vw,2.1rem);margin:.7rem 0 1rem}
+.wish-message p{color:#eee8f4;line-height:1.8;font-family:'Caveat',cursive;font-size:1.35rem}
+.wish-message span{display:block;color:#cfc9dd;line-height:1.7;margin-top:1rem;font-size:.98rem}
+@keyframes heartBeat{50%{transform:scale(1.16)}}
+
+.wish-spark{position:fixed;z-index:90;pointer-events:none;font-size:1.3rem;animation:wishBurst 2.2s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes wishBurst{
+  0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.4) rotate(var(--rot))
+  }
+}
+.wish-stars{position:absolute;inset:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true">
+  <div class="moon"></div>
+  <span class="star" style="left:8%;top:16%;animation-delay:.2s"></span>
+  <span class="star" style="left:18%;top:34%;animation-delay:1s"></span>
+  <span class="star" style="left:31%;top:12%;animation-delay:.6s"></span>
+  <span class="star" style="left:43%;top:28%;animation-delay:1.4s"></span>
+  <span class="star" style="left:57%;top:10%;animation-delay:.8s"></span>
+  <span class="star" style="left:68%;top:31%;animation-delay:1.7s"></span>
+  <span class="star" style="left:79%;top:18%;animation-delay:.4s"></span>
+  <span class="star" style="left:91%;top:39%;animation-delay:1.2s"></span>
+  <span class="star" style="left:13%;top:65%;animation-delay:1.9s"></span>
+  <span class="star" style="left:38%;top:73%;animation-delay:.3s"></span>
+  <span class="star" style="left:62%;top:61%;animation-delay:1.1s"></span>
+  <span class="star" style="left:88%;top:72%;animation-delay:.7s"></span>
+</div>
+
+
+<div class="letter-opening" id="opening">
+  <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open special letter">
+    <div class="env-back"></div>
+    <div class="paper"><div class="mini">मेरी प्यारी सखी के नाम ✨</div><h2>एक छोटी-सी secret चिट्ठी...</h2><p>इसे खोलो,<br>क्योंकि आज थोड़ी सी तारीफ़, थोड़ी सी मस्ती और बहुत सारा प्यार तुम्हारा इंतज़ार कर रहा है ❤️</p></div><h2>एक छोटी-सी चिट्ठी...</h2><p>बस इसे खोलो,<br>फिर तुम्हारे लिए एक छोटी-सी birthday दुनिया है ❤️</p></div>
+    <div class="flap"></div><div class="seal-open">सखी</div><div class="open-hint">💌 खोलो ना... surprise तुम्हारा है</div>
+  </div>
+</div>
+
+<div class="grain"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-frame">
+    <div class="hero-frame-inner">
+      <img src="photo2.jpg" alt="Payal">
+    </div>
+  </div>
+  <p class="hero-eyebrow deva">हमर प्यारी सखी के नाम ✨</p>
+  <h1 class="hero-name display">Payal</h1>
+  <p class="hero-date">20 September — तुम्हारा special day ✨</p>
+  <p class="hero-sub">ek random si raat se shuru hui kahani,<br>pata hi nahi chala kab tum itni khaas ban gayi. ❤️</p>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <p class="story-intro">kabhi socha nahi tha ek random sa connect,<br>itni khoobsurat dosti ban jayega. ❤️</p>
+  <div class="thread"></div>
+
+  <div class="entry">
+    <div class="entry-photo polaroid">
+      <div class="tape top"></div>
+      <img src="photo5.jpg" alt="Payal">
+      <p class="cap">wo pehli raat</p>
+    </div>
+    <div class="entry-text">
+      <p class="moment-tag deva">वह पहली रात</p>
+      <p>HelloTalk pe hum mile — dono bilkul ajnabi, ek random si raat mein. Tumhara agle din exam tha aur tumne <em>kuch bhi nahi</em> padha tha… phir bhi tum aise baat kar rahi thi jaise exam tumhara nahi, kisi aur ka ho. 😂 Us raat mujhe bilkul idea nahi tha ki ye random si mulaqat ek itni pyaari dosti ban jayegi.</p>
+    </div>
+  </div>
+
+  <div class="entry flip">
+    <div class="entry-photo polaroid">
+      <div class="tape corner"></div>
+      <img src="photo1.jpg" alt="Payal">
+      <p class="cap">wo baatein, wo taane</p>
+    </div>
+    <div class="entry-text">
+      <p class="moment-tag deva">फिर हर बात अच्छी लगने लगी</p>
+      <p>Uske baad tumhari har baat achhi lagne lagi — tumhara gaana, tumhari baatein, tumhare taane… haan, woh bhi. 😂 Tumse baat karke kabhi hasi aa jaati hai, kabhi sukoon milta hai, aur kabhi bas mann karta hai ki conversation khatam hi na ho. Shayad isi ko <em>kisi ka dheere-dheere dil ke kareeb aa jaana</em> kehte hain.</p>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-photo polaroid">
+      <div class="tape top"></div>
+      <img src="photo4.jpg" alt="Payal">
+      <p class="cap">saheli, hamesha ke liye</p>
+    </div>
+    <div class="entry-text">
+      <p class="moment-tag deva">हमर प्यारी सखी</p>
+      <p>Pata hi nahi chala kab ek <em>ajnabi</em> se tum meri <em>saheli</em> ban gayi. Tum un logon mein se ho jinke saath baat karne ke liye reason nahi chahiye — bas baat karne ka mann karta hai. Aur haan, ab tumhari aadat si ho gayi hai… isliye please zyada cute mat banna, control mushkil ho jayega. 😌❤️</p>
+    </div>
+  </div>
+</section>
+
+<!-- MEMORY BOARD -->
+<section class="board">
+  <p class="board-title">kuch yaadein, kuch smiles, aur thodi si pagalpan</p>
+  <div class="board-grid">
+    <div class="polaroid p1">
+      <div class="tape top"></div>
+      <img src="photo3.jpg" alt="Payal">
+      <p class="cap">tumhari smile ❤️</p>
+    </div>
+    <div class="polaroid p2">
+      <div class="tape corner"></div>
+      <img src="photo2.jpg" alt="Payal">
+      <p class="cap">haan, ye look bhi favourite hai 😌</p>
+    </div>
+    <div class="polaroid p3">
+      <div class="tape top"></div>
+      <img src="photo5.jpg" alt="Payal">
+      <p class="cap">meri favourite saheli ❤️</p>
+    </div>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section class="letter">
+  <div class="letter-card">
+    <p class="letter-label">तोहर लेल, मैथिलीमे ❤️</p>
+    <p class="letter-hindi deva">तोहर संग भेटल ई दोस्ती हमर लेल सचमुच बहुत खास अछि। तोहर हँसी, तोहर बात, तोहर नखरा आ तोहर छोट-छोट पागलपन — सभ किछु अपन-अपन लागैत अछि। कहियो-कहियो सोचैत छी, एक random राति में भेटल इंसान एतेक अपन केना भऽ गेल! ❤️</p>
+    <p class="letter-translate">You somehow became one of those people I genuinely look forward to talking to. I love the comfort, the teasing, the stupid jokes, the random conversations, and the way you can make an ordinary day feel a little nicer. You are my saheli, my favourite little source of chaos, and someone I secretly care about a lot. 😌❤️</p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wish-stars" id="wishStars"></div>
+
+  <p class="closing-line">
+    ek chhota sa moment sirf tumhare liye... ✨<br>
+    candle ko blow karo, aankhein band karo,<br>
+    aur dil se ek wish karna. ❤️
+  </p>
+
+  <div class="candle-scene" id="candleScene">
+    <div class="candle-glow"></div>
+    <button class="candle-wrap" id="candleBtn" aria-label="Blow the candle">
+      <svg class="candle-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+        <g id="flame" class="flame">
+          <path d="M60 8 C42 31,39 51,60 70 C81 51,78 31,60 8Z" fill="#ff9f5a"/>
+          <path d="M60 24 C51 38,50 49,60 58 C70 49,69 38,60 24Z" fill="#fff1a8"/>
+        </g>
+        <ellipse class="smoke" id="smoke1" cx="58" cy="18" rx="7" ry="10"/>
+        <ellipse class="smoke" id="smoke2" cx="68" cy="5" rx="5" ry="8"/>
+        <rect x="42" y="69" width="36" height="91" rx="7" fill="#ff8fba"/>
+        <rect x="42" y="69" width="36" height="10" rx="4" fill="#ffd2e5"/>
+        <path d="M45 103h30M45 130h30" stroke="#fff" stroke-opacity=".3" stroke-width="5"/>
+        <ellipse cx="60" cy="162" rx="38" ry="9" fill="#ffb8d4" fill-opacity=".5"/>
+      </svg>
+      <span class="candle-caption">
+        <span class="main">🎂 candle ko blow karo ✨</span>
+        <span class="alt">✨ wish made... ab dekho magic ❤️</span>
+      </span>
+    </button>
+  </div>
+
+  <div class="wish-message" id="wishMessage">
+    <div class="wish-heart">♡</div>
+    <h2>your wish is on its way... ✨</h2>
+    <p>
+      pata nahi wish kya thi,<br>
+      par dil se ki gayi cheezein aksar khoobsurat hoti hain. ❤️
+    </p>
+    <span>aur haan... ek secret wish meri taraf se bhi hai —<br>
+      tum hamesha aise hi meri favourite saheli bani rehna. 😌💕</span>
+  </div>
+
+  <div class="signoff">
+    <div class="seal"><span>स</span></div>
+    <p>तोहर सखी — आज, कल, आ हर random conversation में ❤️</p>
+  </div>
+</section>
+
+<footer>banaya gaya Payal ke liye — thodi si masti, thoda sa romance, aur dil se likhi hui kuch baatein ❤️</footer>banaya gaya Payal ke liye — thodi si masti, thoda sa romance, aur dil se likhi hui kuch baatein ❤️</footer>
+
+<script>
+
+  const envelope=document.getElementById('envelope'), opening=document.getElementById('opening');
+  function openLetter(){envelope.classList.add('open');setTimeout(()=>opening.classList.add('hide'),1500);setTimeout(()=>document.body.style.overflow='auto',1900)}
+  document.body.style.overflow='hidden'; envelope.addEventListener('click',openLetter); envelope.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openLetter()});
+
+  const btn = document.getElementById('candleBtn');
+  const flame = document.getElementById('flame');
+  const smoke1 = document.getElementById('smoke1');
+  const smoke2 = document.getElementById('smoke2');
+  const wishMessage = document.getElementById('wishMessage');
+  const wishStars = document.getElementById('wishStars');
+  let blown = false;
+
+  function wishBurst(){
+    const symbols=['✦','✧','♡','♥','✨','⋆','❀','💗'];
+    for(let i=0;i<48;i++){
+      const sp=document.createElement('span');
+      sp.className='wish-spark';
+      sp.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      sp.style.left='50%';
+      sp.style.top='45%';
+      sp.style.setProperty('--dx',(Math.random()*620-310)+'px');
+      sp.style.setProperty('--dy',(Math.random()*520-260)+'px');
+      sp.style.setProperty('--rot',(Math.random()*360-180)+'deg');
+      sp.style.animationDelay=(Math.random()*.45)+'s';
+      document.body.appendChild(sp);
+      setTimeout(()=>sp.remove(),2800);
+    }
+  }
+
+  function launchWishStars(){
+    for(let i=0;i<18;i++){
+      const s=document.createElement('span');
+      s.className='star';
+      s.style.left=(20+Math.random()*60)+'%';
+      s.style.top=(35+Math.random()*30)+'%';
+      s.style.width=(2+Math.random()*4)+'px';
+      s.style.height=s.style.width;
+      s.style.animationDelay=(Math.random()*.8)+'s';
+      wishStars.appendChild(s);
+      setTimeout(()=>s.remove(),3500);
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    if(blown) return;
+    blown = true;
+    flame.classList.add('out');
+    smoke1.classList.add('show');
+    smoke2.classList.add('show');
+    btn.classList.add('blown');
+
+    // The candle "blows out", then the wish magically appears.
+    setTimeout(()=>{
+      wishMessage.classList.add('show');
+      wishBurst();
+      launchWishStars();
+    },700);
+  });
+</script>
+
+</body>
+</html>
